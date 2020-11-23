@@ -1,0 +1,31 @@
+.page-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 16px;
+}
+.section {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px;
+}
+.container {
+  flex: 1;
+}
+.events-list {
+  display: inline-block;
+  width: 300px;
+}
+.calandar {
+  width: calc(100% - 300px);
+  flex: 3;
+  float: right;
+}
+
+.add-event-button {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    padding: 8px;
+}

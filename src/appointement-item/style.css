@@ -1,0 +1,20 @@
+.delete-event {
+    color: red;
+    font-size: 16px;
+    margin-right: 16px;
+    position: absolute;
+    top: 10px;
+    right: 8px;
+}
+.event-item {
+    background-color: #fb8817;
+    margin: 4px;
+    position: relative;
+}
+.event-title{
+    color: white;
+    font-weight: bold;
+}
+.event-date{
+    color: white;
+}
