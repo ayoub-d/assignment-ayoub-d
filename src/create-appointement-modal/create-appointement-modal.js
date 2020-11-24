@@ -15,7 +15,7 @@ function CreateAppointementModal({
   const [errors, seterrors] = useState([]);
 
   useEffect(() => {
-     const validattionErrors = [];
+    const validattionErrors = [];
     if (!appointementTitle) {
       validattionErrors.push("An appointement must have a title");
     }
@@ -23,7 +23,7 @@ function CreateAppointementModal({
       validattionErrors.push("An appointement must have a date");
     }
     seterrors(validattionErrors);
-  },[appointementDate, appointementTitle]);
+  }, [appointementDate, appointementTitle]);
 
   return (
     <>
@@ -63,7 +63,7 @@ function CreateAppointementModal({
         </Modal.Body>
         <Modal.Footer>
           <Button
-          variant="secondary"
+            variant="secondary"
             onClick={() => {
               onCloseModal();
             }}
