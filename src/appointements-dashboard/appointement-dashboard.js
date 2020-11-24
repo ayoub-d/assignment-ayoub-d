@@ -4,19 +4,21 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import moment from "moment";
 import Button from "react-bootstrap/Button";
-import "bootstrap/dist/css/bootstrap.min.css";
 import AppointementItem from "../appointement-item/appointement-item";
-import { filter } from "lodash";
+import { filter, find } from "lodash";
 import "react-datepicker/dist/react-datepicker.css";
 import CreateAppointementModal from "../create-appointement-modal/create-appointement-modal";
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 
 const localizer = momentLocalizer(moment);
+const DragAndDropCalendar = withDragAndDrop(Calendar);
 
 function AppointementsDashboard() {
   const [showAddAppointementModal, setShowAddAppointementModal] = useState(
     false
   );
   const [appointements, setappointements] = useState([]);
+
   const handleAppointementAdded = (appointement) => {
     appointements.push(appointement);
   };
@@ -24,6 +26,16 @@ function AppointementsDashboard() {
     setappointements(
       filter(appointements, (appointement) => appointement.id !== id)
     );
+  };
+
+  const onAppointementDrop = ({ event, start, end }) => {
+    const appointementIndex = appointements.indexOf(event);
+    const updatedAppointement = { ...event, start, end };
+
+    const nextAppointements = [...appointements];
+    nextAppointements.splice(appointementIndex, 1, updatedAppointement);
+
+    setappointements(nextAppointements);
   };
 
   return (
@@ -45,7 +57,7 @@ function AppointementsDashboard() {
             }}
             onAppointementAdded={handleAppointementAdded}
           />
-          {appointements.map((appointement, index) => (
+          {appointements.map((appointement) => (
             <AppointementItem
               appointement={appointement}
               onAppointementDeleted={handleAppointementDeleted}
@@ -53,12 +65,14 @@ function AppointementsDashboard() {
           ))}
         </div>
         <div className="calandar">
-          <Calendar
+          <DragAndDropCalendar
+            onEventDrop={onAppointementDrop}
             localizer={localizer}
             events={appointements}
             startAccessor="start"
             endAccessor="end"
             style={{ height: 500 }}
+            defaultDate={new Date()}
           />
         </div>
       </div>
