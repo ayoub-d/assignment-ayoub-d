@@ -29,3 +29,6 @@
     font-weight: bold;
     padding: 8px;
 }
+.add-appointement-errors {
+    color: red;
+}
