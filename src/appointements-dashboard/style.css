@@ -15,10 +15,10 @@
 }
 .events-list {
   display: inline-block;
-  width: 300px;
+  width: 250px;
 }
 .calandar {
-  width: calc(100% - 300px);
+  width: calc(100% - 250px);
   flex: 3;
   float: right;
 }

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { uid } from "uid";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function CreateAppointementModal({
   showModal,
@@ -13,8 +13,9 @@ function CreateAppointementModal({
   const [appointementTitle, setAppointementTitle] = useState();
   const [appointementDate, setAppointementDate] = useState();
   const [errors, seterrors] = useState([]);
-  const validateAppointement = () => {
-    const validattionErrors = [];
+
+  useEffect(() => {
+     const validattionErrors = [];
     if (!appointementTitle) {
       validattionErrors.push("An appointement must have a title");
     }
@@ -22,7 +23,8 @@ function CreateAppointementModal({
       validattionErrors.push("An appointement must have a date");
     }
     seterrors(validattionErrors);
-  };
+  },[appointementDate, appointementTitle]);
+
   return (
     <>
       <Modal show={showModal}>
@@ -35,7 +37,6 @@ function CreateAppointementModal({
                 onChange={(event) => {
                   setAppointementTitle(event.target.value);
                 }}
-                onBlur={() => validateAppointement()}
               />
             </Form.Group>
             <Form.Group controlId="formBasicAppointementDate">
@@ -50,7 +51,6 @@ function CreateAppointementModal({
                 onChange={(value) => {
                   setAppointementDate(value);
                 }}
-                onBlur={() => validateAppointement()}
                 value={appointementDate}
               />
             </Form.Group>
